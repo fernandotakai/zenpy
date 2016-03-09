@@ -1523,7 +1523,7 @@ class Request(BaseObject):
             return self.api.get_users(self.collaborator_ids)
 
     @collaborator_ids.setter
-    def collaborators(self, collaborators):
+    def collaborator_ids(self, collaborators):
         if collaborators:
             self.collaborator_ids = [o.id for o in collaborators]
 
