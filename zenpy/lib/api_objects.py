@@ -1883,18 +1883,6 @@ class Ticket(BaseObject):
             self.collaborator_ids = [o.id for o in collaborators]
 
     @property
-    def collaborators(self):
-        """
-        |  Comment: Who are currently CC'ed on the ticket
-        """
-        return self.collaborators
-
-    @collaborators.setter
-    def collaborators(self, collaborators):
-        if collaborators:
-            self.collaborators = collaborators
-
-    @property
     def created(self):
         """
         |  Comment: When this record was created
