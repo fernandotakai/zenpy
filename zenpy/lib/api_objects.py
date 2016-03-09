@@ -1880,7 +1880,7 @@ class Ticket(BaseObject):
     @collaborator_ids.setter
     def collaborator_ids(self, collaborators):
         if collaborators:
-            self.collaborator_ids = [o.id for o in collaborators if hasattr('id', o)]
+            self.collaborator_ids = [o.id for o in collaborators if hasattr(o, 'id')]
 
     @property
     def created(self):
