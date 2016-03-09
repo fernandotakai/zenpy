@@ -1383,6 +1383,12 @@ class Request(BaseObject):
         #:| Type: array
         self.collaborator_ids = None
 
+        #:| Comment: Who are CC'ed on the ticket, but are not users
+        #:| Mandatory: no
+        #:| Read-only: no
+        #:| Type: array
+        self.collaborators = None
+
         #:| Comment: When this record was created
         #:| Mandatory: no
         #:| Read-only: yes
@@ -1509,14 +1515,14 @@ class Request(BaseObject):
             self.assignee_id = assignee.id
 
     @property
-    def collaborators(self):
+    def collaborator_ids(self):
         """
         |  Comment: Who are currently CC'ed on the ticket
         """
         if self.api and self.collaborator_ids:
             return self.api.get_users(self.collaborator_ids)
 
-    @collaborators.setter
+    @collaborator_ids.setter
     def collaborators(self, collaborators):
         if collaborators:
             self.collaborator_ids = [o.id for o in collaborators]
@@ -1864,17 +1870,29 @@ class Ticket(BaseObject):
             self.brand_id = brand.id
 
     @property
-    def collaborators(self):
+    def collaborator_ids(self):
         """
         |  Comment: Who are currently CC'ed on the ticket
         """
         if self.api and self.collaborator_ids:
             return self.api.get_users(self.collaborator_ids)
 
+    @collaborator_ids.setter
+    def collaborator_ids(self, collaborators):
+        if collaborators:
+            self.collaborator_ids = [o.id for o in collaborators]
+
+    @property
+    def collaborators(self):
+        """
+        |  Comment: Who are currently CC'ed on the ticket
+        """
+        return self.collaborators
+
     @collaborators.setter
     def collaborators(self, collaborators):
         if collaborators:
-            self.collaborator_ids = [o.id for o in collaborators]
+            self.collaborators = collaborators
 
     @property
     def created(self):
